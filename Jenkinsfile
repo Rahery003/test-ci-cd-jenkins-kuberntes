@@ -8,7 +8,7 @@ pipeline {
     stages {
         stage('Checkout') {
             steps {
-                git 'https://github.com/Rahery003/test-ci-cd-jenkins-kubernte.git'
+                git 'https://github.com/Rahery003/test-ci-cd-jenkins-kuberntes.git'
             }
         }
 
