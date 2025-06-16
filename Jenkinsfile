@@ -28,13 +28,16 @@ pipeline {
                 }
             }
         }
-
+        
         stage('Deploy to Kubernetes') {
             steps {
-                sh """
-                sed -i 's|IMAGE_PLACEHOLDER|$IMAGE|g' deployment.yaml
-                kubectl apply -f deployment.yaml
-                """
+                withCredentials([file(credentialsId: 'kubeconfig-id', variable: 'KUBECONFIG_FILE')]) {
+                    sh """
+                    export KUBECONFIG=$KUBECONFIG_FILE
+                    sed -i 's|IMAGE_PLACEHOLDER|$IMAGE|g' deployment.yaml
+                    kubectl apply -f deployment.yaml
+                    """
+                }
             }
         }
 
