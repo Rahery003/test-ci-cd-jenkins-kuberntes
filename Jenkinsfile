@@ -33,7 +33,7 @@ pipeline {
             steps {
                 sh """
                 sed -i 's|IMAGE_PLACEHOLDER|$IMAGE|g' deployment.yaml
-                kubectl apply -f k8s/deployment.yaml
+                kubectl apply -f deployment.yaml
                 """
             }
         }
