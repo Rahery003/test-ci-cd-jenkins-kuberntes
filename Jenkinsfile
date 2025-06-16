@@ -32,10 +32,12 @@ pipeline {
         stage('Deploy to Kubernetes') {
             steps {
                 sh """
-                kubectl set image deployment/react-app react-container=$IMAGE --record
+                sed -i 's|IMAGE_PLACEHOLDER|$IMAGE|g' deployment.yaml
+                kubectl apply -f k8s/deployment.yaml
                 """
             }
         }
+
 
         stage('Success') {
             steps {
