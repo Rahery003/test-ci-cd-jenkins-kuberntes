@@ -2,6 +2,8 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: react-app
+  labels:
+    app: react
 spec:
   replicas: 2
   selector:
@@ -14,7 +16,7 @@ spec:
     spec:
       containers:
       - name: react-container
-        image: IMAGE_PLACEHOLDER  # 👈 Ceci sera remplacé dans Jenkins
+        image: andrianasolo/react-app:latest  # remplacé par Jenkins (placeholder gardé ci-dessous)
         ports:
         - containerPort: 80
 ---
@@ -22,6 +24,8 @@ apiVersion: v1
 kind: Service
 metadata:
   name: react-service
+  labels:
+    app: react
 spec:
   selector:
     app: react
